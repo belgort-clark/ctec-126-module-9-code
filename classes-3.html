@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Classes Demo 2</title>
+        <title>Classes Demo 3</title>
     </head>
 
     <body>
@@ -20,8 +20,18 @@
                     this.gender = gender
                     this.legs = legs
                     this.state = 'sitting'
+                    this.pic = 'puppy'
                     this.element.addEventListener('click', () => {
-                        alert(this.bark())
+                        // alert(this.bark())
+                        // this.element.remove()
+                        if (this.pic == 'puppy') {
+                            this.element.src = 'https://live.staticflickr.com/1/555998_d7966f3743_z.jpg'
+                            this.pic = 'gayle'
+                        } else {
+                            this.element.src = 'images/golden_puppy.jpg'
+                            this.pic = 'puppy'
+                        }
+
                     })
                 }
 
@@ -50,22 +60,26 @@
                 }
             }
 
-            function createDog() {
-                const dogs = document.querySelector('#dogs')
+
+            const packOfDogs = []
+            const dogs = document.querySelector('#dogs')
+
+            createDog('Bruce', 'Springer', 'Brown', 'Male', 2)
+            createDog('Logan', 'Poodle', 'White and Fluffy', 'Male', 4)
+
+            function createDog(dogName, dogType, dogColor, dogGender, dogLegs) {
                 const div = document.createElement('div')
                 const image = document.createElement('img')
                 const text = document.createElement('p')
                 div.appendChild(image)
                 div.appendChild(text)
                 image.src = 'images/golden_puppy.jpg'
-                // image.setAttribute('src','images/golden_puppy.jpg')
-                const bruce = new Dog(image, 'Bruce', 'Golden Puppy', 'Tan', 'male', 4)
-                image.id = bruce.name
+                const newDog = new Dog(image, dogName, dogType, dogColor, dogGender, dogLegs)
+                packOfDogs.push(newDog)
+                text.id = newDog.name
                 dogs.appendChild(div)
-                document.querySelector('#dogs p').innerText = bruce.getDogInfo()
+                document.querySelector(`#${newDog.name}`).innerText = newDog.getDogInfo()
             }
-
-            createDog()
 
         </script>
     </body>
